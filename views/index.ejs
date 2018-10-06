@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Monoton|Permanent+Marker" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Monoton|Permanent+Marker|Quicksand" rel="stylesheet">
   <link rel="stylesheet" href="/styles/index.css"  type='text/css'>
   <title>Music Uploader</title>
 </head>
@@ -23,6 +23,8 @@
             <h3 class="description-3"> & Play Music</h3>
           </div>
           <br>
+          <br>
+          <br>
         <form action="/upload" method="POST" enctype="multipart/form-data">
           <div class="custom-file card s12 m6 red lighten-1">
             <input type="file" name="file" class="custom-file-input" onchange="checkFile()">
@@ -36,10 +38,11 @@
                 <div class="indeterminate"></div>
             </div>
           </button>
-          <p class= "wrong-file"> Wrong file type, please select correct file </p>
+          <p class= "wrong-file"> Wrong file type, please select correct file type(mp3/mpeg/wav). </p>
         </form>
         <br>
         <hr>
+        <h3 class="description-1"> Song List</h3>
         <% if(files){ %>
           <% files.forEach(function(file) { %>
             <div class="card-panel red lighten-1">
@@ -58,19 +61,18 @@
             </div>
             <% }) %>
               <% } else { %>
-                <p>No songs uploaded, please upload them to appear here.</p>
+                <p>Uploaded songs will appear here.</p>
             <% } %>
       </div>
     </div>
   </div>
-
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
-    const showLoading = ()=> {
+    const showLoading = (e)=> {
     	const submitSongButton = document.getElementById("submit-song");
     	submitSongButton.style.display = "none";
 
@@ -78,6 +80,10 @@
     	displayLoadingButton.style.display = "inline";
 
     	return false;
+    }
+
+    const showDeleting = (e)=>{
+      e.preventDefault();
     }
 
     const checkFile = ()=>{
@@ -97,7 +103,8 @@
     }
 
 
-    window.onload = function(){
+    window.onload = function(e){
+      e.preventDefault();
       const deleteSongButton = document.getElementsByClassName("delete-button");
 
       for(var i=0; i<deleteSongButton.length; i++){
