@@ -72,11 +72,12 @@ app.get('/', (req, res) => {
       res.render('index', { files: false });
     } else {
       files.map(file => {
-        if (
-          file.contentType === 'audio/mpeg' ||
-          file.contentType === 'audio/wav' ||
-          file.contentType === 'audio/mp3'
-        ) {
+        if (file.contentType === 'audio/mpeg' ||
+            file.contentType === 'audio/wav' ||
+            file.contentType === 'audio/mp3' ||
+            file.contentType === 'audio/flac' ||
+            file.contentType === 'audio/aac'||
+            file.contentType === 'audio/ogg') {
           file.isAudio = true;
         } else {
           file.isAudio = false;
@@ -137,7 +138,12 @@ app.get('/audio/:filename', (req, res) => {
     }
 
     // Check if audio
-    if (file.contentType === 'audio/mpeg' || file.contentType === 'audio/wav' || file.contentType === 'audio/mp3') {
+    if (file.contentType === 'audio/mpeg' ||
+        file.contentType === 'audio/wav' ||
+        file.contentType === 'audio/mp3' ||
+        file.contentType === 'audio/flac' ||
+        file.contentType === 'audio/aac' ||
+        file.contentType === 'audio/ogg') {
       // Read output to browser
       const readstream = gfs.createReadStream(file.filename);
       readstream.pipe(res);
@@ -154,7 +160,8 @@ app.get('/audio/:filename', (req, res) => {
 app.delete('/files/:id', (req, res) => {
   gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
     if (err) {
-      return res.status(404).json({ err: err });
+      return res.status(404).json({ err
+      });
     }
 
     res.redirect('/');

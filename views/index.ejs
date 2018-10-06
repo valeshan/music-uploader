@@ -23,7 +23,10 @@
             <h3 class="description-3"> & Play Music</h3>
           </div>
           <br>
-          <br>
+          <p> Currently supported files for each browser:</p>
+          <p> Safari: .mp3, .aac,</p>
+          <p> Firefox: .mp3, .aac, .flac,</p>
+          <p> Chrome: .mp3, .aac, .flac, .wav, .ogg</p>
           <br>
         <form action="/upload" method="POST" enctype="multipart/form-data">
           <div class="custom-file card s12 m6 red lighten-1">
@@ -38,7 +41,7 @@
                 <div class="indeterminate"></div>
             </div>
           </button>
-          <p class= "wrong-file"> Wrong file type, please select correct file type(mp3/mpeg/wav). </p>
+          <p class= "wrong-file red-text"><b> Wrong file type, please select a supported audio file type.<b> </p>
         </form>
         <br>
         <hr>
@@ -50,10 +53,10 @@
                 <label for="<%= file.aliases %>" class="audio-file-label push-s3"><%= file.aliases %></label><br>
                 <audio controls="controls" controls="download">
                   <source src="audio/<%= file.filename %>" type="audio/ogg"  name = "<%= file.aliases %>" alt/>
-                  <source src="audio/<%= file.filename %>" type="audio/mpeg" name = "<%= file.aliases %>" alt/>
+                  <source src="audio/<%= file.filename %>" type="audio/mp4" name = "<%= file.aliases %>" alt/>
                 </audio>
                 <% } else { %>
-                  <p><%= file.filename %> is not a mp3/wav audio file.</p>
+                  <p><%= file.filename %> is not a browser-supported file yet.</p>
                     <% } %>
                       <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
                         <button type="submit" onclick= "showDeleting()" class="delete-button btn waves-effect waves-light blue-grey lighten-2" disabled><i class="material-icons right">delete</i>Delete</button>
@@ -90,7 +93,7 @@
       const submittedFile = document.getElementsByClassName("custom-file-input")[0].value;
       const wrongFileWarning = document.getElementsByClassName("wrong-file")[0]
       const submitSongButton = document.getElementById("submit-song");
-      var re = /(\.mpeg|\.mp3|\.wav)$/i;
+      var re = /(\.mpeg|\.mp3|\.flac|\.ogg|\.aac|\.wav)$/i;
       if(!re.exec(submittedFile))
       {
       wrongFileWarning.style.display = "inline";
