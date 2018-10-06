@@ -1,35 +1,88 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Music Uploader</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  </head>
-  <body>
-    <div class = "container">
-      <h1> Music Uploader</h1>
-      <%= typeof msg != 'undefined' ? msg : '' %>
-      <form action="/upload" method="POST" enctype="multipart/form-data">
-          <div class="file-field input-field">
-            <div class="btn red">
-              <span>File</span>
-              <input name= "singleSong" type="file">
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
-            </div>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/index.css"  type='text/css'>
+  <title>Music Uploader</title>
+</head>
+<body>
+  <div class="container">
+
+    <div class="row">
+      <div class="col s6 push-s3">
+        <h2>Music Uploader</h2>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+          <div class="custom-file card s12 m6 blue-grey lighten-4">
+            <input type="file" name="file" class="custom-file-input">
           </div>
-          <button type="submit" class="btn red">Submit</button>
-      </form>
-      <br>
-      <audio controls>
-        <source src="<%= typeof file != 'undefined' ? file : '' %>" type="audio/mpeg"/>
-        <source src="<%= typeof file != 'undefined' ? file : '' %>" type="audio/wav"/>
-      </audio>
+          <button
+            type="submit" value="Submit" onclick="showLoading()" class="submit-button btn waves-effect waves-light" id="submit-song">
+            Upload
+          </button>
+          <button id="loading" class="btn pulse"> Uploading...
+            <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+          </button>
+        </form>
+        <br>
+        <hr>
+        <% if(files){ %>
+          <% files.forEach(function(file) { %>
+            <div class="card-panel red lighten-1">
+              <% if(file.isAudio) { %>
+                <label for="<%= file.aliases %>" class="audio-file-label push-s3"><%= file.aliases %></label><br>
+                <audio controls="controls" controls="download">
+                  <source src="audio/<%= file.filename %>" type="audio/ogg"  name = "<%= file.aliases %>" alt/>
+                  <source src="audio/<%= file.filename %>" type="audio/mpeg" name = "<%= file.aliases %>" alt/>
+                </audio>
+                <% } else { %>
+                  <p><%= file.filename %> is not a mp3/wav audio file.</p>
+                    <% } %>
+                      <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
+                        <button type="submit" onclick= "showDeleting()" class="delete-button btn waves-effect waves-light blue-grey lighten-2" disabled><i class="material-icons right">delete</i>Delete</button>
+                      </form>
+            </div>
+            <% }) %>
+              <% } else { %>
+                <p>No songs uploaded, please upload them to appear here.</p>
+            <% } %>
+      </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </body>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+
+    const showLoading = ()=> {
+    	const submitSongButton = document.getElementById("submit-song");
+    	submitSongButton.style.display = "none";
+
+    	const displayLoadingButton = document.getElementById("loading");
+    	displayLoadingButton.style.display = "inline";
+
+    	return false;
+    }
+
+    window.onload = function(){
+      const deleteSongButton = document.getElementsByClassName("delete-button");
+
+      for(var i=0; i<deleteSongButton.length; i++){
+        deleteSongButton[i].removeAttribute("disabled")
+      }
+    }
+
+  </script>
+</body>
+
 </html>

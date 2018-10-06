@@ -28,64 +28,139 @@ app.use(express.static('./public'));
 const mongoURI = 'mongodb://peter:eternity69@ds115283.mlab.com:15283/songs-db';
 
 //mongo connection
-
 const conn = mongoose.createConnection(mongoURI);
 
-//set storage engine
-const storage = multer.diskStorage({
-  destination: './public/uploads/',
-  filename: (req, file, cb)=>{
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-  }
-})
+// Init gfs
+let gfs;
 
-//init upload
-const upload = multer({
-  storage,
-  fileFilter: (req, file, cb)=>{
-    checkFileType(file, cb)
-  }
-}).single('singleSong');
+conn.once('open', () => {
+  // Init stream
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
+});
 
-//function check file type to only mp3/flac/wav
-
-const checkFileType = (file, cb) =>{
-  //allowed extensions
-   const fileTypes = /mp3|mpeg|flac|wav/;
-  //check extension - going to match the file name extension to any of the filetype regex
-   const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
-   // check mimetype - avoid mislabeled incorrect file formats
-   const mimeType = fileTypes.test(file.mimetype);
-
-   if(mimeType && extName){
-     return cb(null, true);
-   } else{
-     cb('Error: audio files (mp3, mpeg, flac, wav formats) only.')
-   }
-}
-
-app.get('/', (req, res)=> res.render('index'));
-
-//upload route
-app.post('/upload', (req, res)=>{
-  upload(req, res, (err)=>{
-    if(err){
-      res.render('index', { msg: err})
-    } else{
-      if(req.file == undefined){
-        res.render('index', { msg: 'Please select file to upload.'})
-      } else{
-        res.render('index',
-                    { msg: 'File uploaded.',
-                      file: `/uploads/${req.file.filename}`
-                    }
-                  )
+// Create storage engine
+const storage = new GridFsStorage({
+  url: mongoURI,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
         }
+        const filename = buf.toString('hex') + path.extname(file.originalname);
+        const aliases = path.basename(file.originalname);
+        const fileInfo = {
+          filename,
+          aliases,
+          bucketName: 'uploads'
+        };
+        resolve(fileInfo);
+      });
+    });
+  }
+});
+const upload = multer({storage});
+
+
+// @route GET /
+// @desc Loads form
+app.get('/', (req, res) => {
+  gfs.files.find().toArray((err, files) => {
+    // Check if files
+    if (!files || files.length === 0) {
+      res.render('index', { files: false });
+    } else {
+      files.map(file => {
+        if (
+          file.contentType === 'audio/mpeg' ||
+          file.contentType === 'audio/wav' ||
+          file.contentType === 'audio/mp3'
+        ) {
+          file.isAudio = true;
+        } else {
+          file.isAudio = false;
+        }
+      });
+      res.render('index', { files });
     }
-  })
-})
+  });
+});
 
+// @route POST /upload
+// @desc  Uploads file to DB
+app.post('/upload', upload.single('file'), (req, res) => {
+  // res.json({ file: req.file });
+  res.redirect('/');
+});
 
-const port = 3000;
+// @route GET /files
+// @desc  Display all files in JSON
+app.get('/files', (req, res) => {
+  gfs.files.find().toArray((err, files) => {
+    // Check if files
+    if (!files || files.length === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      });
+    }
 
-app.listen(port, ()=> console.log(`Server running on port ${port}`));
+    // Files exist
+    return res.json(files);
+  });
+});
+
+// @route GET /files/:filename
+// @desc  Display single file object
+app.get('/files/:filename', (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    // Check if file
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      });
+    }
+    // File exists
+    return res.json(file);
+  });
+});
+
+// @route GET /audio/:filename
+// @desc Display audio
+app.get('/audio/:filename', (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    // Check if file
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      });
+    }
+
+    // Check if audio
+    if (file.contentType === 'audio/mpeg' || file.contentType === 'audio/wav' || file.contentType === 'audio/mp3') {
+      // Read output to browser
+      const readstream = gfs.createReadStream(file.filename);
+      readstream.pipe(res);
+    } else {
+      res.status(404).json({
+        err: 'Not an audio file'
+      });
+    }
+  });
+});
+
+// @route DELETE /files/:id
+// @desc  Delete file
+app.delete('/files/:id', (req, res) => {
+  gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+    if (err) {
+      return res.status(404).json({ err: err });
+    }
+
+    res.redirect('/');
+  });
+});
+
+const port = 5000;
+
+app.listen(port, () => console.log(`Server started on port ${port}`));
