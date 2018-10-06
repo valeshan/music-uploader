@@ -1,21 +1,28 @@
-body{
-  background-color: #f2f2f2;
+html {
+  width: 100%;
+  height:100%;
 }
 
 h2{
-  color: #ff4d4d;
+  color: red;
   font-family: 'Monoton', cursive;
 }
 
-.container{
-  margin-top: 1em
+h3{
+  font-family: 'Permanent Marker', cursive;
+  color: red;
 }
+
 
 .custom-file-input{
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   margin-top: 1em;
   margin-bottom: 1em
+}
+
+.wrong-file{
+  display: none;
 }
 
 .audio-file-label{
@@ -36,4 +43,38 @@ h2{
 
 #loading{
   display: none;
+}
+
+/*  ANIMATED COMPONENTS */
+
+.title{
+  animation: fadein 2s;
+}
+
+.description-1{
+  animation: fadein 3s;
+  text-align: center;
+  display: inline
+}
+
+.description-2{
+  animation: fadein 4s;
+  text-align: center;
+  display: inline}
+
+.description-3{
+  animation: fadein 5s;
+  text-align: center;
+  display: inline
+}
+
+
+@keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+
+#content{
+  margin-top: 8em;
 }
