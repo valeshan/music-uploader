@@ -100,3 +100,25 @@ to   { opacity: 1; }
 #content{
   margin-top: 8em;
 }
+
+/***** MEDIA QUERIES ******/
+
+@media only screen and (max-width: 450px){
+  h2{
+    font-size: 2em;
+  }
+  h3{
+    font-size: 1.5em;
+  }
+  p{
+    font-size: 0.8em;
+  }
+
+  .container{
+    margin-right: 0;
+  }
+  .row{
+    margin-left: -12em;
+    margin-right: -12em;
+  }
+}
