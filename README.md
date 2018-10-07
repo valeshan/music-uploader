@@ -10,4 +10,6 @@ Different browsers support varying audio file types. Data is currently stored in
 
 This application uses Node.js, Express and Mongo for backend, and EJS as the template engine.
 
+## Get Started
+
 To test it out, first download files and within the CLI enter ```npm install``` to download all required dependencies, then run on ```localhost:5000```.
