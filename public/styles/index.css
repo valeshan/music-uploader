@@ -115,7 +115,7 @@ to   { opacity: 1; }
   }
 
   .container{
-    margin-right: 0;
+    margin-right: auto;
   }
   .row{
     margin-left: -12em;
