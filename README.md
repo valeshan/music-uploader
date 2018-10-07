@@ -12,4 +12,4 @@ This application uses Node.js, Express and Mongo for backend, and EJS as the tem
 
 ## Get Started
 
-To test it out, first download files and within the CLI enter ```npm install``` to download all required dependencies, then run on ```localhost:5000```.
+To test it out, first download files and within the CLI enter ```npm install``` when you're in the current directory to download all required dependencies, then run on ```localhost:5000```.
