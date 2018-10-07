@@ -14,17 +14,19 @@ body{
 }
 
 h2{
-  color: red;
+  color: white;
   font-family: 'Monoton', cursive;
+  font-size: 3.5em;
 }
 
 h3{
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Lato', cursive;
   color: red;
+  font-size: 2em;
 }
 
 p{
-  font-family: 'Quicksand', cursive;
+  font-family: 'Lato', cursive;
   font-size: 1.5em;
   margin-top: 0;
   margin-bottom: 0;
@@ -43,6 +45,7 @@ p{
   padding-bottom: 0.5em;
   margin-top: 1em;
   margin-bottom: 1em;
+  padding-left: 1em;
 }
 
 .wrong-file{
@@ -73,25 +76,43 @@ p{
 
 .title{
   animation: fadein 2s;
+  color: white;
+  text-align:center;
+  margin-top: auto;
+  margin-left: -54.5%;
+  margin-right: -54.5%;
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 
-.description-delay-1{
+.description{
+  text-align: center;
+}
+
+.description-word{
+  color: white;
+}
+
+.delay-1{
   animation: fadein 3s;
   text-align: center;
   display: inline
 }
 
-.description-delay-2{
+.delay-2{
   animation: fadein 4s;
   text-align: center;
   display: inline}
 
-.description-delay-3{
+.delay-3{
   animation: fadein 5s;
   text-align: center;
   display: inline
 }
 
+.information-words{
+  font-size: 1em;
+}
 
 .song-card{
   margin-top: 2em;
@@ -120,7 +141,11 @@ to   { opacity: 1; }
   p{
     font-size: 0.8em;
   }
-
+  .title{
+    margin-top: 0.1em;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .container{
     margin-right: auto;
   }

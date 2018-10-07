@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,7 +7,7 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Monoton|Permanent+Marker|Quicksand" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Monoton|Lato:300" rel="stylesheet">
   <link rel="stylesheet" href="/styles/index.css"  type='text/css'>
   <title>Music Uploader</title>
 </head>
@@ -16,20 +15,24 @@
   <div class="container">
     <div class="row">
       <div class="col s6 push-s3">
-        <h2 class="title">Music Uploader</h2>
-          <div class="description">
-            <h3 class="description-delay-1">Upload,</h3>
-            <h3 class="description-delay-2"> Download</h3>
-            <h3 class="description-delay-3"> & Play Music</h3>
+        <header>
+          <div class="title red">
+            <h2>Music &nbsp; Uploader</h2>
+            <div class="description">
+              <h3 class="description-word delay-1">Upload,</h3>
+              <h3 class="description-word delay-2"> Download</h3>
+              <h3 class="description-word delay-3"> & Play Music</h3>
+            </div>
           </div>
-          <br>
-          <div class="information">
-            <p> Currently supported files for each browser:</p>
-            <p> Safari: .mp3, .aac,</p>
-            <p> Firefox: .mp3, .aac, .flac,</p>
-            <p> Chrome: .mp3, .aac, .flac, .wav, .ogg</p>
-          </div>
-          <br>
+          </header>
+        <br>
+        <div class="information">
+          <p class="information-words"> Currently supported files for each browser:</p>
+          <p class="information-words"> Safari: .mp3, .aac,</p>
+          <p class="information-words"> Firefox: .mp3, .aac, .flac,</p>
+          <p class="information-words"> Chrome: .mp3, .aac, .flac, .wav, .ogg</p>
+        </div>
+        <br>
         <form action="/upload" method="POST" enctype="multipart/form-data">
           <div class="custom-file card s12 red lighten-1">
             <input type="file" name="file" class="custom-file-input" onchange="checkFile()">
@@ -47,7 +50,7 @@
         </form>
         <br>
         <hr>
-        <h3 class="description-delay-1"> Song List</h3>
+        <h3 class="delay-1"> Song List</h3>
         <% if(files){ %>
           <% files.forEach(function(file) { %>
             <div class="card-panel red lighten-1 song-card">
