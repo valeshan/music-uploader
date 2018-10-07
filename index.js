@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const morgan = require('morgan');
 const path = require('path');
 const mongoose = require('mongoose');
 const crypto = require('crypto');
@@ -12,8 +11,6 @@ const methodOverride = require('method-override');
 //init app
 const app = express();
 
-// morgan for http request logging
-app.use(morgan('dev'));
 //parser
 app.use(bodyParser.json())
 //templating engine
