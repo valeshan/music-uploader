@@ -19,18 +19,18 @@
           <div class="title red">
             <h2>Music &nbsp; Uploader</h2>
             <div class="description">
-              <h3 class="description-word delay-1">Upload,</h3>
-              <h3 class="description-word delay-2"> Download</h3>
-              <h3 class="description-word delay-3"> & Play Music</h3>
+              <h3 class="delay-1">Upload,</h3>
+              <h3 class="delay-2"> Download</h3>
+              <h3 class="delay-3"> & Play Music</h3>
             </div>
           </div>
           </header>
         <br>
         <div class="information">
-          <p class="information-words"> Currently supported files for each browser:</p>
-          <p class="information-words"> Safari: .mp3, .aac,</p>
-          <p class="information-words"> Firefox: .mp3, .aac, .flac,</p>
-          <p class="information-words"> Chrome: .mp3, .aac, .flac, .wav, .ogg</p>
+          <p> Currently supported files for each browser:</p>
+          <p> Safari: .mp3, .aac,</p>
+          <p> Firefox: .mp3, .aac, .flac,</p>
+          <p> Chrome: .mp3, .aac, .flac, .wav, .ogg</p>
         </div>
         <br>
         <form action="/upload" method="POST" enctype="multipart/form-data">
@@ -56,7 +56,7 @@
             <div class="card-panel red lighten-1 song-card">
               <% if(file.isAudio) { %>
                 <label for="<%= file.aliases %>" class="audio-file-label push-s3"><%= file.aliases %></label><br>
-                <audio controls="controls" controls="download">
+                <audio controls autoload="auto">
                   <source src="audio/<%= file.filename %>" type="audio/ogg"  name = "<%= file.aliases %>" alt/>
                   <source src="audio/<%= file.filename %>" type="audio/mp4" name = "<%= file.aliases %>" alt/>
                 </audio>
@@ -120,5 +120,4 @@
 
   </script>
 </body>
-
 </html>

@@ -89,7 +89,7 @@ p{
   text-align: center;
 }
 
-.description-word{
+.description h3{
   color: white;
 }
 
@@ -110,7 +110,7 @@ p{
   display: inline
 }
 
-.information-words{
+.information p{
   font-size: 1em;
 }
 
@@ -129,6 +129,7 @@ to   { opacity: 1; }
 }
 
 /***** MEDIA QUERIES ******/
+
 
 @media only screen and (max-width: 450px){
 
