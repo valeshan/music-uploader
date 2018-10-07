@@ -31,9 +31,11 @@ p{
 }
 
 .container{
+  margin-top: 1.5em;
   background-color: rgba(255, 255, 255, 0.6);
   height: -100vh;
-  padding-bottom: 5em;
+  padding-bottom: 3em;
+  margin-bottom: 1.5em;
 }
 
 .custom-file-input{
@@ -73,23 +75,27 @@ p{
   animation: fadein 2s;
 }
 
-.description-1{
+.description-delay-1{
   animation: fadein 3s;
   text-align: center;
   display: inline
 }
 
-.description-2{
+.description-delay-2{
   animation: fadein 4s;
   text-align: center;
   display: inline}
 
-.description-3{
+.description-delay-3{
   animation: fadein 5s;
   text-align: center;
   display: inline
 }
 
+
+.song-card{
+  margin-top: 2em;
+}
 
 @keyframes fadein {
 from { opacity: 0; }
@@ -104,6 +110,7 @@ to   { opacity: 1; }
 /***** MEDIA QUERIES ******/
 
 @media only screen and (max-width: 450px){
+
   h2{
     font-size: 2em;
   }

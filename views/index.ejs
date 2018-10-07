@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -18,18 +18,20 @@
       <div class="col s6 push-s3">
         <h2 class="title">Music Uploader</h2>
           <div class="description">
-            <h3 class="description-1">Upload,</h3>
-            <h3 class="description-2"> Download</h3>
-            <h3 class="description-3"> & Play Music</h3>
+            <h3 class="description-delay-1">Upload,</h3>
+            <h3 class="description-delay-2"> Download</h3>
+            <h3 class="description-delay-3"> & Play Music</h3>
           </div>
           <br>
-          <p> Currently supported files for each browser:</p>
-          <p> Safari: .mp3, .aac,</p>
-          <p> Firefox: .mp3, .aac, .flac,</p>
-          <p> Chrome: .mp3, .aac, .flac, .wav, .ogg</p>
+          <div class="information">
+            <p> Currently supported files for each browser:</p>
+            <p> Safari: .mp3, .aac,</p>
+            <p> Firefox: .mp3, .aac, .flac,</p>
+            <p> Chrome: .mp3, .aac, .flac, .wav, .ogg</p>
+          </div>
           <br>
         <form action="/upload" method="POST" enctype="multipart/form-data">
-          <div class="custom-file card s12 m6 red lighten-1">
+          <div class="custom-file card s12 red lighten-1">
             <input type="file" name="file" class="custom-file-input" onchange="checkFile()">
           </div>
           <button
@@ -41,14 +43,14 @@
                 <div class="indeterminate"></div>
             </div>
           </button>
-          <p class= "wrong-file red-text"><b> Wrong file type, please select a supported audio file type.<b> </p>
+          <p class= "wrong-file red-text"><b> Wrong file type, please select a supported audio file type.</b> </p>
         </form>
         <br>
         <hr>
-        <h3 class="description-1"> Song List</h3>
+        <h3 class="description-delay-1"> Song List</h3>
         <% if(files){ %>
           <% files.forEach(function(file) { %>
-            <div class="card-panel red lighten-1">
+            <div class="card-panel red lighten-1 song-card">
               <% if(file.isAudio) { %>
                 <label for="<%= file.aliases %>" class="audio-file-label push-s3"><%= file.aliases %></label><br>
                 <audio controls="controls" controls="download">
