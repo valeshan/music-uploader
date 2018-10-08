@@ -40,6 +40,22 @@ p{
   margin-bottom: 1.5em;
 }
 
+.description{
+  text-align: center;
+}
+
+.description h3{
+  color: white;
+}
+
+.information p{
+  font-size: 1em;
+}
+
+.song-card{
+  margin-top: 2em;
+}
+
 .custom-file-input{
   padding-top: 0.5em;
   padding-bottom: 0.5em;
@@ -61,16 +77,6 @@ p{
   margin-top: 0.5em
 }
 
-.blinking {
-	animation: blinker 0.5s linear infinite;
-}
-@keyframes blinker {
-  50% { opacity: 0; }
-}
-
-#loading{
-  display: none;
-}
 
 /*  ANIMATED COMPONENTS */
 
@@ -79,18 +85,10 @@ p{
   color: white;
   text-align:center;
   margin-top: auto;
-  margin-left: -54.5%;
-  margin-right: -54.5%;
+  margin-left: -54.6%;
+  margin-right: -54.6%;
   padding-top: 2em;
   padding-bottom: 2em;
-}
-
-.description{
-  text-align: center;
-}
-
-.description h3{
-  color: white;
 }
 
 .delay-1{
@@ -110,12 +108,15 @@ p{
   display: inline
 }
 
-.information p{
-  font-size: 1em;
+.blinking {
+	animation: blinker 0.5s linear infinite;
+}
+@keyframes blinker {
+  50% { opacity: 0; }
 }
 
-.song-card{
-  margin-top: 2em;
+#loading{
+  display: none;
 }
 
 @keyframes fadein {
@@ -141,16 +142,16 @@ to   { opacity: 1; }
   p{
     font-size: 0.8em;
   }
-  .title{
-    margin-top: 0.1em;
-    margin-left: auto;
-    margin-right: auto;
-  }
   .container{
     margin-right: auto;
   }
   .row{
     margin-left: -12em;
     margin-right: -12em;
+  }
+  .title{
+    margin-top: 0.1em;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
