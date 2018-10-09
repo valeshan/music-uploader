@@ -13,19 +13,18 @@
 </head>
 <body>
   <div class="container">
+    <header class="row red">
+      <div class="title delay-0 col s12">
+        <h2>Music &nbsp; Uploader</h2>
+        <div class="description">
+          <h3 class="delay-1">Upload,</h3>
+          <h3 class="delay-2"> Download</h3>
+          <h3 class="delay-3"> & Play Music</h3>
+        </div>
+      </div>
+      </header>
     <div class="row">
       <div class="col s6 push-s3">
-        <header>
-          <div class="title red">
-            <h2>Music &nbsp; Uploader</h2>
-            <div class="description">
-              <h3 class="delay-1">Upload,</h3>
-              <h3 class="delay-2"> Download</h3>
-              <h3 class="delay-3"> & Play Music</h3>
-            </div>
-          </div>
-          </header>
-        <br>
         <div class="information">
           <p> Currently supported files for each browser:</p>
           <p> Safari: .mp3, .aac,</p>
@@ -52,10 +51,11 @@
         <hr>
         <h3 class="delay-1"> Song List</h3>
         <% if(files){ %>
+          <% files.reverse() %>
           <% files.forEach(function(file) { %>
             <div class="card-panel red lighten-1 song-card">
               <% if(file.isAudio) { %>
-                <label for="<%= file.aliases %>" class="audio-file-label push-s3"><%= file.aliases %></label><br>
+                <label for="<%= file.aliases %>" class="audio-file-label"><%= file.aliases %></label><br>
                 <audio controls autoload="auto">
                   <source src="audio/<%= file.filename %>" type="audio/ogg"  name = "<%= file.aliases %>" alt/>
                   <source src="audio/<%= file.filename %>" type="audio/mp4" name = "<%= file.aliases %>" alt/>
