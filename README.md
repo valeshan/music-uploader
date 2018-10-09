@@ -4,7 +4,7 @@
 
 Music Uploader is a Node.js SPA that allows users to upload, download and play their own songs. This site is currently live on https://sheltered-meadow-20717.herokuapp.com.
 
-Different browsers support varying audio file types. Data is currently stored in a universal database via mLabs (using MongoDB and Amazon S3 Bucket). This is a unified 'music wall' where any user's upload is posted and viewable on this page (user sessions and account set up have not been created yet).
+Different browsers support varying audio file types. Data is currently stored in a universal database via mLabs (using MongoDB and Amazon S3 Bucket). This is currently a unified 'music wall' where any user's upload is posted and viewable on this page (user sessions and account set up have not been created yet).
 
 This application uses Node.js, Express and Mongo for backend, and EJS as the template engine.
 
