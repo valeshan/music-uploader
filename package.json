@@ -9,7 +9,9 @@
     "start": "node index.js ejslint music-uploader/views/index.ejs",
     "lint:ejs": "ejslint music-uploader/views/index.ejs",
     "dev": "node index.js",
-    "build": "build"
+    "build": "build",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "devDependencies": {
     "ejs": "^2.6.1",
@@ -24,6 +26,8 @@
     "method-override": "^3.0.0",
     "mongoose": "^5.2.17",
     "multer": "^1.3.1",
-    "multer-gridfs-storage": "^3.2.3"
-  }
+    "multer-gridfs-storage": "^3.2.3",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
