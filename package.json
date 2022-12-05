@@ -17,8 +17,8 @@
     "nodemon": "^1.18.4"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
     "ejs": "^2.6.1",
     "gridfs-stream": "^1.1.1",
     "method-override": "^3.0.0",
